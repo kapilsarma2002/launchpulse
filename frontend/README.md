@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+ Waitlist & Launch Page Manager
 
-## Getting Started
+ 
+💡 Why This One?
+Frontend-heavy, so you can ship fast using familiar tools (Next.js + Tailwind).
 
-First, run the development server:
+Backend is simpler: No file uploads, fewer edge cases compared to screenshot handling in the feedback tool.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+High polish with low logic complexity.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Great portfolio project — easily demoable with a public URL.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+🗓️ 4-Day Build Plan
+🔥 Day 1 – Setup & Core Landing Page
+ Set up monorepo or two folders: /frontend (Next.js) and /backend (Go).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+ Create waitlist landing page with:
 
-## Learn More
+Project logo, tagline, and email input.
 
-To learn more about Next.js, take a look at the following resources:
+?ref=code URL support.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+ Connect form to Go backend endpoint: /api/signup.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+ Store email + referral code in PostgreSQL.
 
-## Deploy on Vercel
+Learning Goal: Basic Go API + DB setup.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+⚙️ Day 2 – Referral Logic & Dashboard
+ Generate and store unique referral codes (UUID, slugify(email), etc).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ When someone signs up using a referral link, credit the inviter.
+
+ Build minimal admin dashboard in Next.js:
+
+View signups
+
+View referral counts
+
+Leaderboard
+
+Learning Goal: Joins, queries, dashboard UI.
+
+💌 Day 3 – Email & Customization
+ Send welcome email (Mailgun or Resend API).
+
+ Email includes “Your referral link: [site]?ref=abc123”.
+
+ Add branding customization on landing page (logo, background color).
+
+ Add analytics: views vs signups.
+
+Learning Goal: Go + external API (Mailgun), custom settings.
+
+🎉 Day 4 – Polish & Deploy
+ Mobile responsiveness
+
+ Auth for dashboard (simple token or Clerk)
+
+ Deploy:
+
+Frontend → Vercel
+
+Backend → Railway/Fly.io
+
+DB → Supabase or hosted Postgres
+
+ Test referral links, emails
+
+ Write short demo doc / README
+
+🔧 Tech Stack Snapshot
+Layer	Tech
+Frontend	Next.js, Tailwind, SWR
+Backend	Go (Fiber or Gin), GORM
+DB	PostgreSQL
+Auth	Clerk/Auth.js or JWT
+Emails	Resend or Mailgun
+Hosting	Vercel + Railway
+
+🧩 Optional Bonus Features (Time Permitting)
+Custom subdomain (e.g., yourstartup.landing.so)
+
+Admin CSV export
+
+Dark mode
