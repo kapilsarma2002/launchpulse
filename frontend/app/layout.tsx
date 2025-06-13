@@ -23,11 +23,11 @@ export default function RootLayout({
         <Providers>
           <div className="relative flex min-h-screen flex-col">
             <main className="flex-1">
-              <div className="min-h-[calc(100vh-4rem)] bg-gradient-light dark:bg-gradient-dark">
+              <div className="h-[calc(100vh-4rem)] bg-white">
                 {children}
               </div>
             </main>
-            <footer className="glass glass-border mt-auto py-6">
+            <footer className="glass glass-border mt-auto py-6 bg-black">
               <div className="container text-center text-sm text-muted-foreground">
                 <p>
                   © {new Date().getFullYear()} LaunchPulse. All rights reserved.
