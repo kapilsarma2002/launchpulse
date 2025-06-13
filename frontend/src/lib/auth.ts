@@ -5,9 +5,9 @@ let authState: AuthState = {
   user: null,
 };
 
-export const login = async (email: string, password: string) => {
+export const sign-in = async (email: string, password: string) => {
   try {
-    const response = await fetch("/api/login", {
+    const response = await fetch("/api/sign-in", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -16,7 +16,7 @@ export const login = async (email: string, password: string) => {
     });
 
     if (!response.ok) {
-      throw new Error("Login failed");
+      throw new Error("sign-in failed");
     }
 
     const data = await response.json();
@@ -27,7 +27,7 @@ export const login = async (email: string, password: string) => {
 
     return data;
   } catch (error) {
-    console.error("Login error:", error);
+    console.error("sign-in error:", error);
     throw error;
   }
 };

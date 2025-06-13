@@ -72,7 +72,7 @@ export default function Header() {
               </AnimatePresence>
             </motion.button>
 
-            <Link href="/admin/login">
+            <Link href="/sign-in">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

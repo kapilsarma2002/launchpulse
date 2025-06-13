@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
 
     return new Response("Logged in successfully", { status: 200 });
   } catch (error) {
-    console.error("Login error:", error);
+    console.error("sign-in error:", error);
     return new Response("Invalid request", { status: 400 });
   }
 }

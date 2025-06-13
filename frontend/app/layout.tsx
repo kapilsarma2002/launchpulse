@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import type { Metadata } from "next";
+import Providers from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,20 +20,22 @@ export default function RootLayout({
       <body
         className={`${inter.className} antialiased bg-background text-foreground`}
       >
-        <div className="relative flex min-h-screen flex-col">
-          <main className="flex-1">
-            <div className="min-h-[calc(100vh-4rem)] bg-gradient-light dark:bg-gradient-dark">
-              {children}
-            </div>
-          </main>
-          <footer className="glass glass-border mt-auto py-6">
-            <div className="container text-center text-sm text-muted-foreground">
-              <p>
-                © {new Date().getFullYear()} LaunchPulse. All rights reserved.
-              </p>
-            </div>
-          </footer>
-        </div>
+        <Providers>
+          <div className="relative flex min-h-screen flex-col">
+            <main className="flex-1">
+              <div className="min-h-[calc(100vh-4rem)] bg-gradient-light dark:bg-gradient-dark">
+                {children}
+              </div>
+            </main>
+            <footer className="glass glass-border mt-auto py-6">
+              <div className="container text-center text-sm text-muted-foreground">
+                <p>
+                  © {new Date().getFullYear()} LaunchPulse. All rights reserved.
+                </p>
+              </div>
+            </footer>
+          </div>
+        </Providers>
       </body>
     </html>
   );

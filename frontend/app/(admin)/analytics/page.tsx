@@ -72,13 +72,13 @@ export default function AnalyticsPage() {
         className="space-y-8"
       >
         <div>
-          <h1 className="text-3xl font-bold">Analytics Dashboard</h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className="text-3xl font-bold text-gray-600">Analytics Dashboard</h1>
+          <p className="text-gray-400 mt-2">
             Track your waitlist growth and referrals
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-gray-500">
           <StatCard
             title="Total Signups"
             value={analytics?.totalSignups || 0}
@@ -114,7 +114,7 @@ export default function AnalyticsPage() {
             transition={{ delay: 0.2 }}
             className="bg-white p-6 rounded-lg shadow-sm border border-gray-100"
           >
-            <h3 className="text-lg font-medium mb-4">Growth Over Time</h3>
+            <h3 className="text-lg font-medium mb-4 text-gray-500">Growth Over Time</h3>
             <div className="h-64">
               <GrowthChart data={analytics?.dailyGrowth || []} />
             </div>
@@ -126,7 +126,7 @@ export default function AnalyticsPage() {
             transition={{ delay: 0.3 }}
             className="bg-white p-6 rounded-lg shadow-sm border border-gray-100"
           >
-            <h3 className="text-lg font-medium mb-4">Referral Sources</h3>
+            <h3 className="text-lg font-medium mb-4 text-gray-500">Referral Sources</h3>
             <div className="h-64">
               <ReferralChart data={analytics?.referralSources || []} />
             </div>

@@ -13,12 +13,12 @@ export default function AdminLayout({
 
   const navItems = [
     {
-      href: "/admin/branding",
+      href: "/branding",
       label: "Branding",
       icon: IconSettings,
     },
     {
-      href: "/admin/analytics",
+      href: "/analytics",
       label: "Analytics",
       icon: IconChartBar,
     },

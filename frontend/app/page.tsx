@@ -2,6 +2,9 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useAuth } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import {
   IconRocket,
   IconArrowRight,
@@ -9,6 +12,15 @@ import {
 } from "@tabler/icons-react";
 
 export default function Home() {
+  const { isSignedIn } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isSignedIn) {
+      router.push("/branding");
+    }
+  }, [isSignedIn, router]);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -26,7 +38,7 @@ export default function Home() {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 100,
       },
     },
@@ -36,7 +48,7 @@ export default function Home() {
     hover: {
       scale: 1.05,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 400,
         damping: 10,
       },
@@ -87,7 +99,7 @@ export default function Home() {
             variants={itemVariants}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <Link href="/admin/login">
+            <Link href="/sign-in">
               <motion.button
                 variants={buttonVariants}
                 whileHover="hover"
@@ -104,7 +116,7 @@ export default function Home() {
               </motion.button>
             </Link>
             <Link
-              href="https://github.com/yourusername/launchpulse"
+              href="https://github.com/kapilsarma2002/launchpulse"
               target="_blank"
             >
               <motion.button
