@@ -8,13 +8,14 @@ import (
 )
 
 type User struct {
-	ID        uuid.UUID `gorm:"type:uuid;primary_key;default:gen_random_uuid()" json:"id"`
-	Email     string    `gorm:"unique;not null" json:"email"`
-	RefCode   string    `gorm:"unique;not null" json:"refCode"`
-	RefCount  int       `gorm:"default:0" json:"refCount"`
+	ID         uuid.UUID `gorm:"type:uuid;primary_key;default:gen_random_uuid()" json:"id"`
+	ClerkId    string    `gorm:"unique;not null" json:"clerkId"`
+	Email      string    `gorm:"unique;not null" json:"email"`
+	RefCode    string    `gorm:"unique;not null" json:"refCode"`
+	RefCount   int       `gorm:"default:0" json:"refCount"`
 	ReferredBy *string   `gorm:"type:uuid" json:"referredBy,omitempty"`
-	CreatedAt time.Time `json:"createdAt"`
-	UpdatedAt time.Time `json:"updatedAt"`
+	CreatedAt  time.Time `json:"createdAt"`
+	UpdatedAt  time.Time `json:"updatedAt"`
 }
 
 func (u *User) BeforeCreate(tx *gorm.DB) error {
