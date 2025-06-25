@@ -35,7 +35,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, appName } = await req.json();
+    const { email, appName, referredBy } = await req.json();
 
     if (!email || !appName) {
       return NextResponse.json({ error: 'Email and app name are required' }, { status: 400 });
@@ -63,6 +63,7 @@ export async function POST(req: NextRequest) {
       data: {
         email,
         appId: app.id,
+        referredBy: referredBy || null,
       },
     });
 

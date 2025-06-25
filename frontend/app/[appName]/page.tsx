@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, use } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { IconUsers, IconSend } from '@tabler/icons-react';
 
@@ -19,7 +20,9 @@ export default function WaitlistPage({ params }: { params: Promise<{ appName: st
   const [error, setError] = useState('');
 
   const { appName } = use(params);
-
+  const searchParams = useSearchParams();
+  const referredBy = searchParams.get('ref') || undefined;
+  
   useEffect(() => {
     if (!appName) return;
 
@@ -55,7 +58,7 @@ export default function WaitlistPage({ params }: { params: Promise<{ appName: st
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, appName }),
+        body: JSON.stringify({ email, appName, referredBy }),
       });
 
       if (!res.ok) {

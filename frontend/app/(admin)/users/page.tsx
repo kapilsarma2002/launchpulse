@@ -106,9 +106,9 @@ export default function UsersPage() {
                     <th scope="col" className="py-3 px-6 text-right">
                       Actions
                     </th>
-                  </tr>
-                </thead>
-                <tbody>
+          </tr>
+        </thead>
+        <tbody>
                   {users.map((user) => (
                     <tr key={user.id} className="bg-white border-b hover:bg-gray-50">
                       <th scope="row" className="py-4 px-6 font-medium text-black whitespace-nowrap">
@@ -126,10 +126,10 @@ export default function UsersPage() {
                           {copiedId === user.id ? 'Copied!' : <CopyIcon className="w-4 h-4" />}
                         </button>
                       </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            </tr>
+          ))}
+        </tbody>
+      </table>
             </div>
           )}
         </CardContent>
