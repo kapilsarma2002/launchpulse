@@ -11,8 +11,10 @@ import {
   IconBrandGithub,
 } from "@tabler/icons-react";
 
+
 export default function Home() {
-  const { isSignedIn } = useAuth();
+  const { isSignedIn, userId } = useAuth();
+  const href = userId ? '/branding' : '/new-user'
   const router = useRouter();
 
   useEffect(() => {
@@ -99,7 +101,7 @@ export default function Home() {
             variants={itemVariants}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <Link href="/sign-in">
+            <Link href={href}>
               <motion.button
                 variants={buttonVariants}
                 whileHover="hover"
