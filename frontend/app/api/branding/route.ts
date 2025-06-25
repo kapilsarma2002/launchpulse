@@ -11,7 +11,7 @@ export async function GET() {
   });
 }
 
-export async function PUT(req: NextRequest) {
+export async function POST(req: NextRequest) {
   const data = await req.json();
   let settings = await prisma.app.findFirst();
   if (settings) {
