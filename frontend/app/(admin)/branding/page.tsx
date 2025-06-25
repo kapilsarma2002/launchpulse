@@ -1,38 +1,48 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import {
-  IconUpload,
-  IconBrandTailwind,
-  IconBrightnessHalf,
-} from "@tabler/icons-react";
 
-interface SiteSettings {
+interface App {
   name: string;
   description: string;
   logoUrl: string;
 }
 
 export default function BrandingPage() {
-  const [settings, setSettings] = useState<SiteSettings>({
+  const [appData, setAppData] = useState<App>({
     name: "",
     description: "",
     logoUrl: "",
   });
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    const fetchBranding = async () => {
+      try {
+        const res = await fetch("/api/branding");
+        if (!res.ok) throw new Error("Failed to fetch branding");
+        const data: App = await res.json();
+        setAppData(data);
+      } catch (error) {
+        console.error("Error fetching settings:", error);
+      }
+    };
+
+    fetchBranding();
+  }, [])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8080/api/settings", {
+      const res = await fetch("/api/branding", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(settings),
+        body: JSON.stringify(appData),
       });
 
       if (!res.ok) throw new Error("Failed to update settings");
@@ -65,9 +75,9 @@ export default function BrandingPage() {
             </label>
             <input
               type="text"
-              value={settings.name}
+              value={appData.name}
               onChange={(e) =>
-                setSettings({ ...settings, name: e.target.value })
+                setAppData({ ...appData, name: e.target.value })
               }
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
               required
@@ -79,9 +89,9 @@ export default function BrandingPage() {
               Description
             </label>
             <textarea
-              value={settings.description}
+              value={appData.description}
               onChange={(e) =>
-                setSettings({ ...settings, description: e.target.value })
+                setAppData({ ...appData, description: e.target.value })
               }
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
               rows={3}
@@ -95,9 +105,9 @@ export default function BrandingPage() {
             </label>
             <input
               type="url"
-              value={settings.logoUrl}
+              value={appData.logoUrl}
               onChange={(e) =>
-                setSettings({ ...settings, logoUrl: e.target.value })
+                setAppData({ ...appData, logoUrl: e.target.value })
               }
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
               placeholder="https://example.com/logo.png"

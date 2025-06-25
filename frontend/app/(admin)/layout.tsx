@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IconSettings, IconChartBar } from "@tabler/icons-react";
+import { IconSettings, IconChartBar, IconUser } from "@tabler/icons-react";
 
 export default function AdminLayout({
   children,
@@ -22,6 +22,12 @@ export default function AdminLayout({
       label: "Analytics",
       icon: IconChartBar,
     },
+
+    {
+      href: "/users",
+      label: "Users",
+      icon: IconUser,
+    }
   ];
 
   return (
