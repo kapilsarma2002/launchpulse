@@ -23,8 +23,6 @@ export async function GET() {
 
   const appId = app.map(a => a.id);
 
-  console.log("app, appId", app, appId);
-
   // Find all AppUsers for these apps
   const users = await prisma.appUser.findMany({
     where: { 

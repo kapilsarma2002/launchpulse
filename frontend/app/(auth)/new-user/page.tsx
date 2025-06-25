@@ -5,7 +5,6 @@ import { redirect } from 'next/navigation';
 const createNewUser = async () => {
   const user = await currentUser();
   if (!user || !user.id) {
-    console.log('No user or user id found, aborting user creation.');
     return;
   }
   const match = await prisma.user.findUnique({
@@ -14,16 +13,18 @@ const createNewUser = async () => {
     }
   })
 
-  if (match) {
-    console.log('User already exists in database', user.id);
-  }
 
   if (!match) {
-    console.log('Creating new user in database', user.id);
-    await prisma.user.create({
+    const newUser = await prisma.user.create({
       data: {
         clerkId: user.id,
         email: user.emailAddresses[0].emailAddress as string,
+      }
+    })
+
+    await prisma.app.create({
+      data: {
+        ownerId: newUser.id
       }
     })
   }

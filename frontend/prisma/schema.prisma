@@ -20,9 +20,9 @@ model User {
 
 model App {
   id          String   @id @default(uuid())
-  name        String
-  description String
-  logoUrl     String
+  name        String?
+  description String?
+  logoUrl     String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   appUsers    AppUser[]
