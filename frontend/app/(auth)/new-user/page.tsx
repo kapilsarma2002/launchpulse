@@ -1,34 +1,34 @@
+import { prisma } from '@/lib/prisma';
 import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 
 const createNewUser = async () => {
   const user = await currentUser();
-  
-  if (!user) {
-    redirect('/sign-in');
+  if (!user || !user.id) {
+    console.log('No user or user id found, aborting user creation.');
+    return;
   }
-
-  try {
-    const response = await fetch('http://localhost:8080/api/clerk-user', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        clerkId: user.id,
-        email: user.emailAddresses[0].emailAddress,
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to create user');
+  const match = await prisma.user.findUnique({
+    where: {
+      clerkId: user.id,
     }
+  })
 
-    redirect('/branding');
-  } catch (error) {
-    console.error('Error creating user:', error);
-    redirect('/sign-in');
+  if (match) {
+    console.log('User already exists in database', user.id);
   }
+
+  if (!match) {
+    console.log('Creating new user in database', user.id);
+    await prisma.user.create({
+      data: {
+        clerkId: user.id,
+        email: user.emailAddresses[0].emailAddress as string,
+      }
+    })
+  }
+
+  redirect('/branding');
 }
 
 const NewUser = async () => {
